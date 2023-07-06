@@ -37,7 +37,7 @@ app.post("/cadastro", async (req, res) => {
     try {
         const user = await db.collection("users").findOne({ email: email });
         if (user) {
-            return res.sendStatus(409);
+            return res.status(409).send("Usuário já cadastrado!");
         }
         const hash = bcrypt.hashSync(password, 10);
         await db.collection("users").insertOne({
@@ -66,11 +66,11 @@ app.post("/", async(req, res) => {
     try {
         const user = await db.collection("users").findOne({email});
         if(!user) {
-            return res.sendStatus(404);
+            return res.status(404).send("Usuario não cadastrado!");
         }
         const compare = bcrypt.compareSync(password, user.password);
         if(!compare) {
-            return res.sendStatus(401);
+            return res.status(401).send("Senha incorreta!");
         }
         const token = uuid();
         await db.collection("session").insertOne({
@@ -83,7 +83,7 @@ app.post("/", async(req, res) => {
     }
 })
 
-app.get("loggedUser", async(req, res) => {
+app.get("/loggedUser", async(req, res) => {
     const {authrization} = req.headers;
     const token = authrization?.replace("Bearer ", "");
 
