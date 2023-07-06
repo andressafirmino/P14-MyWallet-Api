@@ -103,5 +103,5 @@ app.get("loggedUser", async(req, res) => {
     }
 })
 
-const PORT = 5000;
-app.listen(PORT, () => console.log(`O servidor está rodando na porta ${PORT}`));
+const port = process.env.PORT || 5000;
+app.listen(port, () => console.log(`O servidor está rodando na porta ${port}`));
