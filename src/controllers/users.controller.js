@@ -40,7 +40,7 @@ export async function signIn(req, res) {
             token,
             idUser: user._id
         })
-        res.status(200).send({ token: token });
+        res.status(200).send({ token: token, name: user.name, email: user.email });
     } catch (e) {
         res.status(500).send(e.message);
     }

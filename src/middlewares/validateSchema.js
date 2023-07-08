@@ -1,6 +1,3 @@
-import { signUpSchema } from "../schemas/users.schemas.js";
-
-
 export function validateSchema(schema) {
     return (req, res, next) => {
         const validateSignUp = schema.validate(req.body, { abortEarly: false });
