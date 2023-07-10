@@ -10,5 +10,5 @@ export const typeSchema = joi.object({
 export const newTransactionSchema = joi.object({
     value: joi.number().positive().precision(2).required(),
     description: joi.string().min(1).max(20).required(),
-    email: joi.string().email().required()
+    email: joi.string().required()
 })
