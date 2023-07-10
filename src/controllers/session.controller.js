@@ -3,7 +3,6 @@ import { db } from "../database/database.connection.js";
 
 export async function renderOperation(req, res) {
     const { email } = req.body;
-    console.log(user)
     try {
         const operations = await db.collection("operations").find({ email }).toArray();
         //console.log(operations);
