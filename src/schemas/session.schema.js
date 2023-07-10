@@ -1,7 +1,7 @@
 import joi from "joi";
 
 export const bodySchema = joi.object({
-    email: joi.string().email().required()
+    user: joi.string().email().required()
 })
 export const typeSchema = joi.object({
     type: joi.valid('entrada', 'saida').required()
