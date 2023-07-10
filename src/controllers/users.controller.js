@@ -45,3 +45,13 @@ export async function signIn(req, res) {
         res.status(500).send(e.message);
     }
 }
+
+export async function logout(req, res) {
+    const {token} = req.body;
+
+    try {
+        const deleteUser = await db.collection("session").deleteOne({token})
+    } catch (e) {
+        res.status(500).send(e.message);
+    }
+}
