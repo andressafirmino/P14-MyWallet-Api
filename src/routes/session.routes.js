@@ -7,7 +7,7 @@ import { bodySchema, newTransactionSchema, typeSchema } from "../schemas/session
 
 const sessionsRouter = Router();
 
-sessionsRouter.get("/home", validateAuth, validateSchema(bodySchema), renderOperation);
+sessionsRouter.get("/home", validateAuth, renderOperation);
 sessionsRouter.post("/nova-transacao/:type",validateAuth, validateSchemaHeader(typeSchema), validateSchema(newTransactionSchema), newTransaction);
 
 export default sessionsRouter;
