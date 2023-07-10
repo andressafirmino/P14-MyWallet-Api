@@ -2,9 +2,9 @@ import { db } from "../database/database.connection.js";
 
 
 export async function renderOperation(req, res) {
-    const { user } = req.body;
+    const { email } = req.body;
     try {
-        const operations = await db.collection("operations").find({ user }).toArray();
+        const operations = await db.collection("operations").find({ email }).toArray();
         //console.log(operations);
         res.send({ operations: operations });
     } catch (e) {
