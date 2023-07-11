@@ -47,7 +47,7 @@ export async function signIn(req, res) {
 }
 
 export async function logout(req, res) {
-    const {token} = req.body;
+    const {token} = req.headers;
 
     try {
         const deleteUser = await db.collection("session").deleteOne({token});
