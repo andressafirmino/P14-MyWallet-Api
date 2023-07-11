@@ -47,11 +47,22 @@ export async function signIn(req, res) {
 }
 
 export async function logout(req, res) {
-    const {token} = req.headers;
+    const { authorization } = req.headers;
+    const token = authorization?.replace("Bearer ", "");
 
     try {
         const deleteUser = await db.collection("session").deleteOne({token});
-        res.send(200);
+        res.send(deleteUser);
+    } catch (e) {
+        res.status(500).send(e.message);
+    }
+}
+
+export async function home (req, res) {
+    
+    try {
+        const users = await db.collection("session").find().toArray();
+        res.send(users);
     } catch (e) {
         res.status(500).send(e.message);
     }
