@@ -5,7 +5,6 @@ export async function renderOperation(req, res) {
     const { email } = req.query;
     try {
         const operations = await db.collection("operations").find({ email}).toArray();
-        //console.log(operations);
         res.send({ operations: operations });
     } catch (e) {
         res.status(500).send(e.message);
