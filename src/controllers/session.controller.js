@@ -1,5 +1,4 @@
-import { db } from "../database/database.connection.js";
-import { getOperations } from "../services/session.service.js";
+import { NewTransaction, getOperations } from "../services/session.service.js";
 
 
 export async function renderOperation(req, res) {
@@ -15,13 +14,9 @@ export async function renderOperation(req, res) {
 export async function newTransaction(req, res) {
     const { value, description, email } = req.body;
     const { type } = req.params;
-    const date = new Date();
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const dateNow = `${day}/${month}`;
 
     try {
-        await db.collection("operations").insertOne({ value, description, type, dateNow, email });
+        await NewTransaction(value, description, email, type)
         res.send("OK");
     } catch (e) {
         res.status(500).send(e.message);
