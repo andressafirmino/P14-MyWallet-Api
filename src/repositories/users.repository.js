@@ -22,3 +22,7 @@ export async function createSession(token, idUser) {
 export async function deleteUser(token) {
     return await db.collection("session").deleteOne({ token });
 }
+
+export async function getSession() {
+    return await db.collection("session").find().toArray();
+}

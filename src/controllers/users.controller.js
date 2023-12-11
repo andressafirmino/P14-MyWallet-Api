@@ -1,7 +1,4 @@
-import bcrypt from "bcrypt";
-import { db } from "../database/database.connection.js";
-import { v4 as uuid } from "uuid";
-import { SignUp, deleteUserByToken } from "../services/users.service.js";
+import { SignIn, SignUp, deleteUserByToken, getUsers } from "../services/users.service.js";
 
 
 export async function signUp(req, res) {
@@ -17,22 +14,8 @@ export async function signUp(req, res) {
 
 export async function signIn(req, res) {
     const { email, password } = req.body;
-    console.log(email, password)
     try {
-        /*  const user = await db.collection("users").findOne({ email });
-         if (!user) {
-             return res.status(404).send({ message: "Usuario não cadastrado!" });
-         }
-         const compare = bcrypt.compareSync(password, user.password);
-         if (!compare) {
-             return res.status(401).send({ message: "Senha incorreta!" });
-         }
-         const token = uuid();
-         await db.collection("session").insertOne({
-             token,
-             idUser: user._id
-         }) */
-        const user = await signIn(email, password);
+        const user = await SignIn(email, password);
         res.status(200).send(user);
     } catch (e) {
         res.status(500).send(e.message);
@@ -54,7 +37,7 @@ export async function logout(req, res) {
 export async function home(req, res) {
 
     try {
-        const users = await db.collection("session").find().toArray();
+        const users = await getUsers();
         res.send(users);
     } catch (e) {
         res.status(500).send(e.message);
