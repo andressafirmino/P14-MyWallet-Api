@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { db } from "../database/database.connection.js";
 import { v4 as uuid } from "uuid";
-import { SignUp } from "../services/users.service.js";
+import { SignUp, deleteUserByToken } from "../services/users.service.js";
 
 
 export async function signUp(req, res) {
@@ -17,7 +17,7 @@ export async function signUp(req, res) {
 
 export async function signIn(req, res) {
     const { email, password } = req.body;
-console.log(email, password)
+    console.log(email, password)
     try {
         /*  const user = await db.collection("users").findOne({ email });
          if (!user) {
@@ -44,8 +44,8 @@ export async function logout(req, res) {
     const token = authorization?.replace("Bearer ", "");
 
     try {
-        const deleteUser = await db.collection("session").deleteOne({ token });
-        res.send(deleteUser);
+        const user = await deleteUserByToken(token);
+        res.send(user);
     } catch (e) {
         res.status(500).send(e.message);
     }

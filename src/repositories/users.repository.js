@@ -12,9 +12,13 @@ export async function createUser(name, email, password) {
     })
 }
 
-export async function createSession(token, idUser){
+export async function createSession(token, idUser) {
     return await db.collection("session").insertOne({
         token,
         idUser
     })
+}
+
+export async function deleteUser(token) {
+    return await db.collection("session").deleteOne({ token });
 }

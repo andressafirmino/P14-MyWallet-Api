@@ -1,7 +1,7 @@
 import { conflictError } from "../errors/conflict.js";
 import { notFoundError } from "../errors/notFound.js";
 import { unauthorizedError } from "../errors/unauthorized.error.js";
-import { createSession, createUser, getUserByEmail } from "../repositories/users.repository.js";
+import { createSession, createUser, deleteUser, getUserByEmail } from "../repositories/users.repository.js";
 import bcrypt from "bcrypt";
 
 export async function SignUp(name, email, password) {
@@ -23,4 +23,8 @@ export async function SignIn(email, password) {
     await createSession(token, user._id);
 
     return { token, name: user.name, email: user.email }
+}
+
+export async function deleteUserByToken(token) {
+    return await deleteUser(token);
 }
