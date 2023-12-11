@@ -1,11 +1,11 @@
 import { db } from "../database/database.connection.js";
+import { getOperations } from "../services/session.service.js";
 
 
 export async function renderOperation(req, res) {
     const { email } = req.query;
     try {
-        const operations = await db.collection("operations").find({ email}).toArray();
-        console.log(operations)
+        const operations = await getOperations(email);
         res.send({ operations: operations });
     } catch (e) {
         res.status(500).send(e.message);
