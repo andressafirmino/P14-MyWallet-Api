@@ -9,4 +9,5 @@ usersRouter.post("/cadastro", validateSchema(signUpSchema), signUp);
 usersRouter.post("/", validateSchema(signInSchema), signIn);
 usersRouter.delete("/home", logout);
 usersRouter.get("/", home);
+
 export default usersRouter;

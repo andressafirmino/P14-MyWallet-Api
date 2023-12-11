@@ -8,8 +8,8 @@ import { v4 as uuid } from "uuid";
 export async function SignUp(name, email, password) {
     const user = await getUserByEmail(email);
     if (user) throw conflictError("Usuário");
-    const hash = bcrypt.hashSync(password, 10);
 
+    const hash = bcrypt.hashSync(password, 10);
     return await createUser(name, email, hash);
 }
 

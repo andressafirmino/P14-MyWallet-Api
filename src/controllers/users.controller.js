@@ -1,6 +1,5 @@
 import { SignIn, SignUp, deleteUserByToken, getUsers } from "../services/users.service.js";
 
-
 export async function signUp(req, res) {
     const { name, email, password } = req.body;
 

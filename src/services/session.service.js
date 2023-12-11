@@ -1,7 +1,7 @@
 import { createNewTransaction, findOperationsByEmail } from "../repositories/session.repository.js";
 
 export async function getOperations(email) {
-     await findOperationsByEmail(email);
+    return await findOperationsByEmail(email);
 }
 
 export async function NewTransaction(value, description, type, email) {

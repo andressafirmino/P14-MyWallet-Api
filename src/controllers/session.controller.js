@@ -3,6 +3,7 @@ import { NewTransaction, getOperations } from "../services/session.service.js";
 
 export async function renderOperation(req, res) {
     const { email } = req.query;
+    
     try {
         const operations = await getOperations(email);
         res.send({ operations: operations });

@@ -5,18 +5,11 @@ export async function getUserByEmail(email) {
 }
 
 export async function createUser(name, email, password) {
-    return await db.collection("users").insertOne({
-        name,
-        email,
-        password
-    })
+    return await db.collection("users").insertOne({ name, email, password })
 }
 
 export async function createSession(token, idUser) {
-    return await db.collection("session").insertOne({
-        token,
-        idUser
-    })
+    return await db.collection("session").insertOne({ token, idUser })
 }
 
 export async function deleteUser(token) {
